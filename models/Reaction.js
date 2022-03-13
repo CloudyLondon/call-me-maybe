@@ -21,6 +21,10 @@ const reactionSchema = mongoose.Schema(
       type: Date,
       // Set default value to the current timestamp
       // Use a getter method to format the timestamp on query
+      default: Date.now,
+      get: (timestamp) => {
+        dateFormat(timestamp); //built in js function
+      },
     },
   },
   {

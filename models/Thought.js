@@ -12,8 +12,9 @@ const thoughtSchema = mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      //use moment
-      get: (timestamp) => timestamp, //TODO: Set default value to the current timestamp,     //Use a getter method to format the timestamp on query
+      get: (timestamp) => {
+        dateFormat(timestamp); //built in js function
+      },
     },
     username: {
       type: String,
