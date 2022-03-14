@@ -13,7 +13,7 @@ const thoughtsController = {
       });
   },
 
-  // GET a single user by its _id and populated thought and friend data
+  // GET a single thought by its _id and populated thought and friend data
   getSingleThought(req, res) {
     Thoughts.findOne({ _id: req.params.id })
       .select("-__v")
@@ -82,7 +82,7 @@ const thoughtsController = {
       });
   },
 
-  // POST to add a new friend to a user’s friend list
+  // POST to create a reaction stored in a single thought’s reactions array field
   addANewReaction(req, res) {
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
