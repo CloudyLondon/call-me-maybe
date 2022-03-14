@@ -1,7 +1,7 @@
 const { User, Thoughts } = require("./../models");
 const thoughtsController = {
   // GET all thoughts
-  getThought(req, res) {
+  getThoughts(req, res) {
     Thoughts.find()
       .select("-__v") //this is from mongoose when the record is being created
       .then((dbThoughtData) => {
