@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const reactionSchema = require("./Reaction");
+const dateFormat = require("./../utils/dateFormat");
 
 const thoughtSchema = mongoose.Schema(
   {
@@ -9,6 +10,7 @@ const thoughtSchema = mongoose.Schema(
       minlength: 1,
       maxlength: 280,
     },
+
     createdAt: {
       type: Date,
       default: Date.now,
@@ -16,6 +18,7 @@ const thoughtSchema = mongoose.Schema(
         dateFormat(timestamp); //built in js function
       },
     },
+
     username: {
       type: String,
       required: true,
@@ -24,6 +27,7 @@ const thoughtSchema = mongoose.Schema(
   },
   {
     toJSON: {
+      virtual: true,
       getters: true, //reaction: dont need virtual, use: `getters: true`
     },
     id: false,

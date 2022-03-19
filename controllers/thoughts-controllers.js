@@ -47,7 +47,7 @@ const thoughtsController = {
   // PUT to update a thought by its _id
   updateThought(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.userId },
+      { _id: req.params.id },
       {
         $set: req.body,
       },
@@ -70,7 +70,7 @@ const thoughtsController = {
 
   // DELETE to remove user by its _id , BONUS: and delete associated thoughts)
   deleteThought(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+    Thought.findOneAndRemove({ _id: req.params.id })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           return res.status(404).json({ message: "No thought with this id!" });
@@ -86,7 +86,7 @@ const thoughtsController = {
   // POST to create a reaction stored in a single thought’s reactions array field
   addANewReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.id },
       { $addToSet: { reactions: req.params.reactionId } },
       { new: true }
     )
@@ -104,7 +104,7 @@ const thoughtsController = {
   // DELETE to remove a friend from a user’s friend list
   removeAReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.id },
       { $pull: { reactions: req.params.reactionId } },
       { new: true }
     )
