@@ -17,9 +17,9 @@ const thoughtsController = {
   // GET a single thought by its _id and populated thought and friend data
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.id })
-      .select("-__v")
-      .populate("friends")
-      .populate("thoughts")
+      // .select("-__v")
+      // .populate("friends")
+      // .populate("thoughts")
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           return res.status(404).json({ message: "No Thought with this id!" });
