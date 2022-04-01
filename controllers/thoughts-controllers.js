@@ -84,10 +84,10 @@ const thoughtsController = {
   },
 
   // POST to create a reaction stored in a single thought’s reactions array field
-  addANewReaction(req, res) {
+  addANewReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.id },
-      { $addToSet: { reactions: req.params.reactionId } },
+      { _id: params.thoughtId },
+      { $addToSet: { reactions: body } },
       { new: true }
     )
       .then((dbThoughtData) => {
@@ -104,7 +104,7 @@ const thoughtsController = {
   // DELETE to remove a friend from a user’s friend list
   removeAReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.params.thoughtId },
       { $pull: { reactions: req.params.reactionId } },
       { new: true }
     )
