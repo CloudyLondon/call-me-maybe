@@ -1,3 +1,5 @@
+const thought = require("../models/Thought");
+const user = require("../models/User");
 const { User, Thought } = require("./../models");
 const thoughtsController = {
   // GET all thoughts
@@ -35,6 +37,13 @@ const thoughtsController = {
   // POST to create a new thought (don’t forget to push the created thought’s _id to the associated user’s thoughts array field)
   createThought(req, res) {
     Thought.create(req.body)
+      .then((dbThoughtData) => {
+        return User.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $push: { thoughts: dbThoughtData._id } },
+          { new: true }
+        );
+      })
       .then((dbThoughtData) => {
         res.json(dbThoughtData);
       })
@@ -105,9 +114,10 @@ const thoughtsController = {
   removeAReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reactions: req.params.reactionId } },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { new: true }
     )
+
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           return res.status(404).json({ message: "No thought with this id!" });

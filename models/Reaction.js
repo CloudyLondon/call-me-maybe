@@ -32,7 +32,7 @@ const reactionSchema = mongoose.Schema(
     toJSON: {
       getters: true, //reaction: dont need virtual, use: `getters: true`
     },
-    id: false,
+    _id: false,
   }
 );
 
