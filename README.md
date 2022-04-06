@@ -27,7 +27,7 @@ MongoDb installed and running
 
 ### Walkthrough
 
-[Walkthrough](./assets/call-me-maybe-walkthrough.mov)
+[Walkthrough](https://youtu.be/VXvJyXyAMM8)
 
 ### Contribution
 
